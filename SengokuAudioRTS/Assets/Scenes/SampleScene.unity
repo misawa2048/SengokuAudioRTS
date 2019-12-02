@@ -307,8 +307,8 @@ RectTransform:
   - {fileID: 782446808}
   - {fileID: 1076210041}
   - {fileID: 1321123976}
-  - {fileID: 991527738}
   - {fileID: 1961375134}
+  - {fileID: 991527738}
   - {fileID: 1498946868}
   - {fileID: 361768221}
   m_Father: {fileID: 0}
@@ -505,7 +505,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -659,7 +659,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -1000,8 +1000,10 @@ MonoBehaviour:
     type: 3}
   m_pieceType: 0
   m_soldierNum: 6000
+  m_buttonText: {fileID: 818485051}
   m_remainText: {fileID: 1489004522}
   m_layerName: LayerPl1
+  m_keyCode: 49
 --- !u!114 &782446813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1102,7 +1104,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -1179,7 +1181,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -1383,7 +1385,7 @@ GameObject:
   - component: {fileID: 991527740}
   - component: {fileID: 991527739}
   m_Layer: 5
-  m_Name: 1PButtonPawn (3)
+  m_Name: 2PButtonKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1403,7 +1405,7 @@ RectTransform:
   - {fileID: 1721024497}
   - {fileID: 747301450}
   m_Father: {fileID: 138761226}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1469,8 +1471,10 @@ MonoBehaviour:
     type: 3}
   m_pieceType: 1
   m_soldierNum: 3000
+  m_buttonText: {fileID: 1721024498}
   m_remainText: {fileID: 747301452}
   m_layerName: LayerPl2
+  m_keyCode: 57
 --- !u!114 &991527741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,7 +1569,7 @@ GameObject:
   - component: {fileID: 1076210043}
   - component: {fileID: 1076210042}
   m_Layer: 5
-  m_Name: 1PButtonPawn (1)
+  m_Name: 1PButtonKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1651,8 +1655,10 @@ MonoBehaviour:
     type: 3}
   m_pieceType: 1
   m_soldierNum: 3000
+  m_buttonText: {fileID: 623175402}
   m_remainText: {fileID: 33913509}
   m_layerName: LayerPl1
+  m_keyCode: 50
 --- !u!114 &1076210044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1843,7 +1849,7 @@ GameObject:
   - component: {fileID: 1321123978}
   - component: {fileID: 1321123977}
   m_Layer: 5
-  m_Name: 1PButtonPawn (2)
+  m_Name: 1PButtonTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1929,8 +1935,10 @@ MonoBehaviour:
     type: 3}
   m_pieceType: 2
   m_soldierNum: 1000
+  m_buttonText: {fileID: 363741913}
   m_remainText: {fileID: 1950874154}
   m_layerName: LayerPl1
+  m_keyCode: 51
 --- !u!114 &1321123979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2118,7 +2126,7 @@ GameObject:
   - component: {fileID: 1498946870}
   - component: {fileID: 1498946869}
   m_Layer: 5
-  m_Name: 1PButtonPawn (5)
+  m_Name: 2PButtonTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2204,8 +2212,10 @@ MonoBehaviour:
     type: 3}
   m_pieceType: 2
   m_soldierNum: 1000
+  m_buttonText: {fileID: 2082942514}
   m_remainText: {fileID: 1837350633}
   m_layerName: LayerPl2
+  m_keyCode: 48
 --- !u!114 &1498946871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2342,7 +2352,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -2563,7 +2573,7 @@ GameObject:
   - component: {fileID: 1961375136}
   - component: {fileID: 1961375135}
   m_Layer: 5
-  m_Name: 1PButtonPawn (4)
+  m_Name: 2PButtonPawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2583,7 +2593,7 @@ RectTransform:
   - {fileID: 786019747}
   - {fileID: 2037429591}
   m_Father: {fileID: 138761226}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2649,8 +2659,10 @@ MonoBehaviour:
     type: 3}
   m_pieceType: 0
   m_soldierNum: 6000
+  m_buttonText: {fileID: 786019748}
   m_remainText: {fileID: 2037429593}
   m_layerName: LayerPl2
+  m_keyCode: 56
 --- !u!114 &1961375137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2880,7 +2892,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3

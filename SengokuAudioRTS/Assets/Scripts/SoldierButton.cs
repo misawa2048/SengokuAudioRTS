@@ -12,8 +12,10 @@ namespace SARTS
         [SerializeField] GameObject m_soldierPrefab = null;
         [SerializeField] Soldier.PieceType m_pieceType = Soldier.PieceType.Pawn;
         [SerializeField,Range(0,100000)] int m_soldierNum = 1000;
+        [SerializeField] Text m_buttonText = null;
         [SerializeField] Text m_remainText = null;
         [SerializeField] string m_layerName = "LayerPl1";
+        [SerializeField] KeyCode m_keyCode = KeyCode.Alpha0;
         float pow;
 
         Soldier m_soldierScr;
@@ -25,6 +27,14 @@ namespace SARTS
         // Start is called before the first frame update
         void Start()
         {
+            string str = "足軽";
+            switch (m_pieceType)
+            {
+                default: break;
+                case Soldier.PieceType.Knight: str = "騎馬"; break;
+                case Soldier.PieceType.Tank: str = "鉄砲"; break;
+            }
+            m_buttonText.text = str + "\n[" + m_keyCode.ToString()+"]";
             m_remainText.text = m_soldierNum.ToString();
         }
 
@@ -48,6 +58,14 @@ namespace SARTS
                     m_soldierScr.SetPower(pow);
                     m_remainText.text = Mathf.FloorToInt(m_soldierNum).ToString();
                 }
+            }
+            if (Input.GetKeyDown(m_keyCode))
+            {
+                PointerDown();
+            }
+            else if (Input.GetKeyUp(m_keyCode))
+            {
+                PointerUp();
             }
         }
 
