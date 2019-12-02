@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -32,12 +34,16 @@ namespace SARTS
         public PieceType pieceType;
         public MoveState moveState;
         public PlSide plSide;
+        [SerializeField] AnimationCurve m_volumeAc = null;
+        [SerializeField] AnimationCurve m_panAc = null;
         [SerializeField] GameObject m_messangerPrefab = null;
         [SerializeField, Range(0f, 100000f)] float m_power=1000f;
         [SerializeField] Transform m_meshTr = null;
         [SerializeField] TMPro.TMP_Text m_text = null;
         [SerializeField, Range(0.01f,1f)] float m_moveSpdGain = 0.1f;
+        [SerializeField] AudioMixerGroup[] m_audioMixerGroupArr=null;
         float m_moveSpd;
+        AudioSource m_ac;
 
 
         private void Awake()
@@ -48,6 +54,9 @@ namespace SARTS
         // Start is called before the first frame update
         void Start()
         {
+            m_ac = GetComponent<AudioSource>();
+            m_ac.volume = 0f;
+
             Color col;
             switch (pieceType)
             {
@@ -83,6 +92,8 @@ namespace SARTS
         // Update is called once per frame
         void Update()
         {
+            setVolumeAndPan();
+
             if (m_meshTr != null)
             {
                 m_meshTr.transform.localScale = new Vector3(1f, m_power * HEIGHT_GAIN, 1f);
@@ -147,7 +158,6 @@ namespace SARTS
                 if (ret <= 0f)
                 {
                     result |= 1; // pl全滅
-                    Destroy(gameObject);
                 }
                 ret = enemyScr.AddPower(-10f*myRate);
                 if (ret <= 0f)
@@ -160,23 +170,31 @@ namespace SARTS
                     GameObject emGo = collision.gameObject;
                     Soldier emSoldier = emGo.GetComponent<Soldier>();
 
-                    GameObject plMesGo = Instantiate(m_messangerPrefab, transform.position, transform.rotation);
-                    Messenger plMessenger = plMesGo.GetComponent<Messenger>();
-                    GameObject emMesGo = Instantiate(m_messangerPrefab, emGo.transform.position, emGo.transform.rotation);
-                    Messenger emMessenger = emMesGo.GetComponent<Messenger>();
 
                     if (result == 1)
                     {
+                        GameObject plMesGo = Instantiate(m_messangerPrefab, transform.position, transform.rotation);
+                        Messenger plMessenger = plMesGo.GetComponent<Messenger>();
+                        //GameObject emMesGo = Instantiate(m_messangerPrefab, emGo.transform.position, emGo.transform.rotation);
+                        //Messenger emMessenger = emMesGo.GetComponent<Messenger>();
                         plMessenger.SetResultMessage(this, false);
-                        emMessenger.SetResultMessage(emSoldier, true);
+                        //emMessenger.SetResultMessage(emSoldier, true);
                     }
                     if (result == 2)
                     {
-                        plMessenger.SetResultMessage(this, true);
+                        //GameObject plMesGo = Instantiate(m_messangerPrefab, transform.position, transform.rotation);
+                        //Messenger plMessenger = plMesGo.GetComponent<Messenger>();
+                        GameObject emMesGo = Instantiate(m_messangerPrefab, emGo.transform.position, emGo.transform.rotation);
+                        Messenger emMessenger = emMesGo.GetComponent<Messenger>();
+                        //plMessenger.SetResultMessage(this, true);
                         emMessenger.SetResultMessage(emSoldier, false);
                     }
                     if (result == 3)
                     {
+                        GameObject plMesGo = Instantiate(m_messangerPrefab, transform.position, transform.rotation);
+                        Messenger plMessenger = plMesGo.GetComponent<Messenger>();
+                        GameObject emMesGo = Instantiate(m_messangerPrefab, emGo.transform.position, emGo.transform.rotation);
+                        Messenger emMessenger = emMesGo.GetComponent<Messenger>();
                         plMessenger.SetResultMessage(this, false);
                         emMessenger.SetResultMessage(emSoldier, false);
                     }
@@ -184,10 +202,12 @@ namespace SARTS
 
                 if ((result & 1) !=0)
                 {
+                    gameObject.GetComponent<BoxCollider>().enabled = false; ;
                     Destroy(gameObject);
                 }
                 if ((result & 2) != 0)
                 {
+                    collision.gameObject.GetComponent<BoxCollider>().enabled = false; ;
                     Destroy(collision.gameObject);
                 }
 
@@ -202,6 +222,14 @@ namespace SARTS
         {
             m_power = Mathf.Max(m_power + _power,0f);
             return m_power;
+        }
+        private void setVolumeAndPan()
+        {
+            float pan = Mathf.Clamp01(Camera.main.WorldToViewportPoint(transform.position).x);
+            float distVol = (plSide == PlSide.Pl2) ? pan : (1f-pan);
+            float amountVol = Mathf.Min(m_power * 0.001f, 1f);
+            m_ac.volume = m_volumeAc.Evaluate(distVol)*amountVol;
+            m_ac.panStereo = m_panAc.Evaluate(pan);
         }
 
     }
