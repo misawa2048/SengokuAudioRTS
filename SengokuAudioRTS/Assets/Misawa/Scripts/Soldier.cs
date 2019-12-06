@@ -10,7 +10,7 @@ using UnityEditor;
 
 namespace SARTS
 {
-    [ExecuteInEditMode]
+    //[ExecuteInEditMode]
     public class Soldier : MonoBehaviour
     {
         public enum PieceType
@@ -41,7 +41,12 @@ namespace SARTS
         [SerializeField] Transform m_meshTr = null;
         [SerializeField] TMPro.TMP_Text m_text = null;
         [SerializeField, Range(0.01f,1f)] float m_moveSpdGain = 0.1f;
+        [SerializeField] AudioClip m_winAc = null;
+        [SerializeField] AudioClip[] m_footAcArr = null;
+        [SerializeField] AudioClip[] m_hitAcArr = null;
         [SerializeField] AudioMixerGroup[] m_audioMixerGroupArr=null;
+        AudioSource m_footAudioSource;
+        AudioSource m_hitAudioSource;
         float m_moveSpd;
         AudioSource m_ac;
 
@@ -56,6 +61,7 @@ namespace SARTS
         {
             m_ac = GetComponent<AudioSource>();
             m_ac.volume = 0f;
+            m_ac.outputAudioMixerGroup = m_audioMixerGroupArr[(plSide == PlSide.Pl1)?0:1];
 
             Color col;
             switch (pieceType)
@@ -74,6 +80,16 @@ namespace SARTS
             {
                 m_moveSpd *= -1f;
             }
+
+            m_footAudioSource = gameObject.AddComponent<AudioSource>();
+            m_footAudioSource.loop = true;
+            m_footAudioSource.clip = m_footAcArr[(int)pieceType];
+            m_footAudioSource.outputAudioMixerGroup = m_ac.outputAudioMixerGroup;
+            m_footAudioSource.Play();
+            m_hitAudioSource = gameObject.AddComponent<AudioSource>();
+            m_hitAudioSource.loop = false;
+            m_hitAudioSource.outputAudioMixerGroup = m_ac.outputAudioMixerGroup;
+           // m_hitAudioSource.Play();
 
 #if UNITY_EDITOR
             if (!EditorApplication.isPlayingOrWillChangePlaymode)
@@ -165,6 +181,18 @@ namespace SARTS
                     result |= 2; // em全滅
                 }
 
+                // sound test---------------------
+                if (((result & 1) == 0) && (Random.value < 0.05f))
+                {
+                    m_hitAudioSource.PlayOneShot(m_hitAcArr[(int)pieceType]);
+                }
+                if (result == 2)
+                {
+                    m_ac.PlayOneShot(m_winAc, 2f);
+                }
+                // sound test---------------------
+
+
                 if (result != 0)
                 {
                     GameObject emGo = collision.gameObject;
@@ -204,7 +232,7 @@ namespace SARTS
                 {
                     gameObject.GetComponent<BoxCollider>().enabled = false; ;
                     Destroy(gameObject);
-                }
+                }else 
                 if ((result & 2) != 0)
                 {
                     collision.gameObject.GetComponent<BoxCollider>().enabled = false; ;
@@ -230,6 +258,11 @@ namespace SARTS
             float amountVol = Mathf.Min(m_power * 0.001f, 1f);
             m_ac.volume = m_volumeAc.Evaluate(distVol)*amountVol;
             m_ac.panStereo = m_panAc.Evaluate(pan);
+
+            m_footAudioSource.volume = m_ac.volume;
+            m_footAudioSource.panStereo = m_ac.panStereo;
+            m_hitAudioSource.volume = Mathf.Min(m_ac.volume*2f,1f);
+            m_hitAudioSource.panStereo = m_ac.panStereo;
         }
 
     }

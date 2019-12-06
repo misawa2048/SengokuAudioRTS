@@ -283,30 +283,30 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 3.0163112
-      outSlope: 3.0163112
+      value: -1
+      inSlope: 0.000000742017
+      outSlope: 0.000000742017
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.16752146
+      outWeight: 0.16065574
     - serializedVersion: 3
-      time: 0.34403196
-      value: 0.73086315
-      inSlope: 1
-      outSlope: 1
+      time: 0.5
+      value: 0.01909563
+      inSlope: 7.7496576
+      outSlope: 7.7496576
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.06557381
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.043671813
-      outSlope: 0.043671813
+      inSlope: 0.000000742017
+      outSlope: 0.000000742017
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.1148761
+      inWeight: 0.16065574
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -317,6 +317,15 @@ MonoBehaviour:
   m_meshTr: {fileID: 4975685971221952444}
   m_text: {fileID: 4975685970919683616}
   m_moveSpdGain: 0.3
+  m_winAc: {fileID: 8300000, guid: 10795429145c281439955743d10dda4e, type: 3}
+  m_footAcArr:
+  - {fileID: 8300000, guid: a32d40ffe4b02b0488678440d8dff98e, type: 3}
+  - {fileID: 8300000, guid: aa9c305f90d36b6439e29fded95ed7e8, type: 3}
+  - {fileID: 8300000, guid: c934c03d3618bb641a3b326c4e9ce42d, type: 3}
+  m_hitAcArr:
+  - {fileID: 8300000, guid: f9fc8d96508f08148ac7e085a6f51472, type: 3}
+  - {fileID: 8300000, guid: a1d1052e3eca1e947b7e8d320e805b2a, type: 3}
+  - {fileID: 8300000, guid: fef131f931570af4e8809427f5a33031, type: 3}
   m_audioMixerGroupArr:
   - {fileID: 8698226143908820810, guid: 7858b72db9d117b4a86633a0e12d7c5b, type: 2}
   - {fileID: -3338593767718852512, guid: 7858b72db9d117b4a86633a0e12d7c5b, type: 2}
@@ -362,7 +371,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: f62f768648453994594561a382f6c0af, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -372,7 +381,7 @@ AudioSource:
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: 0.05
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
